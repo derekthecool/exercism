@@ -1,13 +1,9 @@
 function Get-NucleotideCount()
 {
   param(
+    [ValidatePattern('^[GACT]*$', ErrorMessage = "Invalid nucleotide in strand")]
     [string]$Strand
   )
-
-  if($Strand -notmatch '^[GACT]*$')
-  {
-    throw 'Invalid nucleotide in strand'
-  }
 
   @{
     G = [regex]::Matches($Strand, 'G').Count
