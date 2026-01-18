@@ -5,8 +5,13 @@ function Get-NucleotideCount()
     [string]$Strand
   )
 
+  function count
+  {
+    param([ValueFromPipeline]$Pattern) [regex]::Matches($Strand, $Pattern).Count
+  }
+
   @{
-    G = [regex]::Matches($Strand, 'G').Count
+    G = 'G'|count
     A = [regex]::Matches($Strand, 'A').Count
     C = [regex]::Matches($Strand, 'C').Count
     T = [regex]::Matches($Strand, 'T').Count
